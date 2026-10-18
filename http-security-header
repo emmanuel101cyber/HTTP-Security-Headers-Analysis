@@ -55,3 +55,4 @@ The presence of these headers alone does not establish that the website is secur
 This exercise demonstrated how curl can be used to inspect HTTP response headers and document security-related controls.
 
 It improved my understanding of HTTP, browser security policies, and basic web security assessment techniques.
+![HTTP Security Headers Analysis Screenshot](screenshots/http-security-headers.png)

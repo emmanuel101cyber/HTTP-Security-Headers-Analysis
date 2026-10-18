@@ -1,0 +1,57 @@
+    HTTP Security Headers Analysis
+
+ 1. Objective
+
+Inspect HTTP response headers to identify security-related controls and understand their purposes.
+
+     2. Target
+
+* Website: https://www.linkedin.com/
+* Tool: curl
+* Environment:** Kali Linux
+* Request type:** HTTP HEAD request
+
+      3. Command Used
+
+bash
+curl -sS -I --max-time 15 https://www.linkedin.com/
+
+
+     4. Results
+
+The server returned `HTTP/2 200`, indicating a successful HTTP response.
+
+The following security-related headers were observed:
+
+| Header                       | Observed value                  | Purpose                                                                          |
+| ---------------------------- | ------------------------------- | -------------------------------------------------------------------------------- |
+| Strict-Transport-Security    | max-age=31536000                | Enforces HTTPS for the specified duration after the browser receives the policy. |
+| Content-Security-Policy      | Present                         | Defines permitted sources and restrictions for page resources.                   |
+| X-Content-Type-Options       | nosniff                         | Prevents MIME-type sniffing.                                                     |
+| X-Frame-Options              | SAMEORIGIN                      | Restricts framing to the same origin.                                            |
+| Referrer-Policy              | strict-origin-when-cross-origin | Limits referrer information sent to other origins.                               |
+| X-XSS-Protection             | 0                               | Disables the legacy browser XSS filter.                                          |
+| Cross-Origin-Opener-Policy   | same-origin-allow-popups        | Controls isolation between browsing contexts.                                    |
+| Cross-Origin-Resource-Policy | same-origin                     | Restricts certain cross-origin resource access.                                  |
+
+    5. Analysis
+
+The response included multiple security-related headers, including Content-Security-Policy, Strict-Transport-Security, and X-Content-Type-Options.
+
+These headers provide browser-side security controls that can help reduce certain classes of attacks when correctly configured.
+
+The presence of these headers alone does not establish that the website is secure. A comprehensive assessment would require additional authorized testing.
+
+    6. Limitations
+
+* This exercise inspected response headers only.
+* It did not test for exploitable vulnerabilities.
+* The findings represent one observation at one point in time.
+* The analysis did not verify the complete effectiveness of each policy.
+* Cookie values and session identifiers were excluded from this report.
+
+      7. Conclusion
+
+This exercise demonstrated how curl can be used to inspect HTTP response headers and document security-related controls.
+
+It improved my understanding of HTTP, browser security policies, and basic web security assessment techniques.
